@@ -1,0 +1,68 @@
+<template>
+
+    <lightning-card title="Complaint Details" icon-name="standard:case">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-input
+                label="Complaint Number"
+                value={complaint.Name}
+                disabled>
+            </lightning-input>
+
+            <lightning-input
+                label="Customer Name"
+                value={complaint.Customer_Name__c}
+                disabled>
+            </lightning-input>
+
+            <lightning-input
+                label="Email"
+                value={complaint.Email__c}
+                disabled>
+            </lightning-input>
+
+            <lightning-input
+                label="Phone"
+                value={complaint.Phone__c}
+                disabled>
+            </lightning-input>
+
+            <lightning-input
+                label="Category"
+                value={complaint.Category__c}
+                disabled>
+            </lightning-input>
+
+            <lightning-input
+                label="Priority"
+                value={complaint.Priority__c}
+                disabled>
+            </lightning-input>
+
+            <lightning-combobox
+                label="Status"
+                value={status}
+                options={statusOptions}
+                onchange={handleStatus}>
+            </lightning-combobox>
+
+            <lightning-textarea
+                label="Resolution Notes"
+                value={resolutionNotes}
+                onchange={handleNotes}>
+            </lightning-textarea>
+
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    variant="brand"
+                    label="Save Changes"
+                    onclick={saveComplaint}>
+                </lightning-button>
+            </div>
+
+        </div>
+
+    </lightning-card>
+
+</template>

@@ -1,0 +1,101 @@
+<template>
+
+    <lightning-card title="Support Agent Dashboard" icon-name="standard:dashboard">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Dashboard Cards -->
+            <lightning-layout multiple-rows>
+
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-card title="Total Complaints">
+                        <div class="slds-text-heading_large slds-align_absolute-center">
+                            {totalComplaints}
+                        </div>
+                    </lightning-card>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-card title="New">
+                        <div class="slds-text-heading_large slds-align_absolute-center">
+                            {newCount}
+                        </div>
+                    </lightning-card>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-card title="In Progress">
+                        <div class="slds-text-heading_large slds-align_absolute-center">
+                            {progressCount}
+                        </div>
+                    </lightning-card>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-card title="Resolved">
+                        <div class="slds-text-heading_large slds-align_absolute-center">
+                            {resolvedCount}
+                        </div>
+                    </lightning-card>
+                </lightning-layout-item>
+
+            </lightning-layout>
+
+            <!-- Search + Filters -->
+            <lightning-layout multiple-rows class="slds-m-vertical_medium">
+
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input
+                        type="search"
+                        label="Search Complaints"
+                        placeholder="Search by Complaint No or Customer Name"
+                        onchange={handleSearch}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-combobox
+                        label="Status"
+                        value={selectedStatus}
+                        options={statusOptions}
+                        onchange={handleStatusChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-combobox
+                        label="Priority"
+                        value={selectedPriority}
+                        options={priorityOptions}
+                        onchange={handlePriorityChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+            </lightning-layout>
+
+            <!-- Complaint Table -->
+            <lightning-datatable
+                key-field="Id"
+                data={complaints}
+                columns={columns}
+                sorted-by={sortedBy}
+                sorted-direction={sortDirection}
+                onsort={handleSort}
+                onrowaction={handleRowAction}>
+            </lightning-datatable>
+
+            <!-- Complaint Details -->
+            <template if:true={showDetails}>
+
+                <c-complaint-details
+                    complaint={selectedComplaint}
+                    onrefreshdashboard={refreshDashboard}>
+                </c-complaint-details>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>
